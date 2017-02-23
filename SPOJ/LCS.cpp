@@ -1,51 +1,62 @@
 #include <cstdio>
 #include <cstring>
 
-const int N =  2 * 250003;
+const int MaxN = 250005;
 
-int last, cnd, ch[N][26], pre[N], step[N];
-char s[N];
-void insert(char x) {
-	static int p, q, np, nq;
-	np = ++cnd;
-	p = last;
-	step[np] = step[p] + 1;
-	for (; p && ! ch[p][x]; p = pre[p]) ch[p][x] = np;
-	if (!p) pre[np] = 1;
+struct node {
+	int len;
+	node *ch[26], *pre;
+} node_mset[MaxN * 2 + 11], *cnode = node_mset, *root, *last;
+
+char s[MaxN];
+
+void Insert(int w) {
+	node *np = cnode++, *p = last;
+	np->len = p->len + 1;
+	for (; p && !p->ch[w]; p = p->pre)
+	  p->ch[w] = np;
+	if (!p) 
+	  np->pre = root;
 	else {
-		q = ch[p][x];
-		if (step[q] == step[p] + 1) pre[np] = q;
+		node *q = p->ch[w];
+		if (p->len + 1 == q->len)
+		  np->pre = q;
 		else {
-			nq = ++cnd;
-			step[nq] = step[p] + 1;
-			memcpy(ch[nq], ch[q], sizeof ch[nq]);
-			pre[nq] = pre[q];
-			pre[q] = pre[np] = nq;
-			for (; p && ch[p][x] == q; p = pre[p]) ch[p][x] = nq;
+			node *nq = cnode++;
+			memcpy(nq->ch, q->ch, sizeof nq->ch);
+			nq->len = p->len + 1;
+			nq->pre = q->pre;
+			q->pre = np->pre = nq;
+			for (; p && p->ch[w] == q; p = p->pre)
+				p->ch[w] = nq;
 		}
 	}
 	last = np;
 }
 
 int main() {
+	int ans = 0, len = 0, idx;
+	last = root = cnode++;
+	node *u = root;
 	scanf("%s", s);
-	int ans = 0;
-	cnd = last = 1;
-	for (char *i = s; *i; ++i) insert(*i - 'a');
-	int u = 1, len = 0;
-	char x;
+	for (char *it = s; *it; ++it)
+		Insert(*it - 'a');
 	scanf("%s", s);
-	for (char *i = s; *i; ++i) {
-		x = *i - 'a';
-		if (ch[u][x]) {
+	for (char *it = s; *it; ++it) {
+		idx = *it - 'a';
+		if (u->ch[idx]) {
 			++len;
-			u = ch[u][x];
+			u = u->ch[idx];
 		} else {
-			while (!ch[u][x] && u) u = pre[u];
-			if (!u) u = 1, len = 0;
-			else len = step[u] + 1,u = ch[u][x];
+			while (u && !u->ch[idx])
+				u = u->pre;
+			if (!u)
+				u = root, len = 0;
+			else
+				len = u->len + 1, u = u->ch[idx];
 		}
-		if (ans < len) ans = len;
+		if (ans < len)
+			ans = len;
 	}
 	printf("%d\n", ans);
 	return 0;
