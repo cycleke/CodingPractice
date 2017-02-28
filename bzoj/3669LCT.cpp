@@ -30,7 +30,7 @@ int f[MaxN];
 int gf(int u) {
 	return (f[u] ^ u) ? f[u] = gf(f[u]) : u;
 }
-struct LCA {
+struct LCT {
 	struct node {
 		int val;
 		bool rev;
