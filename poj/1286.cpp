@@ -14,6 +14,8 @@ inline int gcd(int a, int b) {
 
 inline long long solve(int n, int m) {
 	static long long ret;
+	if (n == 0)
+		return 0LL;
 	ret = 0;
 	for (register int i = 0; i < n; ++i)
 		ret+= qp(m, gcd(n, i));
@@ -25,8 +27,8 @@ inline long long solve(int n, int m) {
 }
 
 int main() {
-	int n, m;
-	while (scanf("%d%d", &m, &n) != EOF && (n | m))
-		printf("%lld\n", solve(n, m));
+	int n;
+	while (scanf("%d", &n) != EOF && (~n))
+		printf("%lld\n", solve(n, 3));
 	return 0;
 }
