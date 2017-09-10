@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder SRM 712 - 900: BinaryTreeAndPermutation</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>SRM 712</span>
+        <span id='contest-division'>1</span>
+        <span id='problem-score'>900</span>
+        <span id='problem-name'>BinaryTreeAndPermutation</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro escaped="1">A full binary tree is a rooted tree with the following property: each vertex that is not a leaf has exactly two children - a left child and a right child.
+<br />
+<br />
+You have a full binary tree.
+The tree has n vertices, numbered 0 through n-1.
+You are given the <type>int[]</type>s <b>lef</b> and <b>rig</b> that describe the shape of the tree.
+If vertex i is a leaf we have <b>lef</b>[i] = <b>rig</b>[i] = -1.
+Otherwise, <b>lef</b>[i] is the left child and <b>rig</b>[i] is the right child of vertex i.
+<br />
+<br />
+The ancestors of vertex x are the vertices on the unique path from x to the root of the tree, including x and the root.
+The least common ancestor of x and y, denoted LCA(x,y), is the first vertex on the path from x to the root that is also the ancestor of y.
+Equivalently, among all vertices that are ancestors of both x and y, LCA(x,y) is the one that is farthest away from the root.
+<br />
+<br />
+We are looking for a permutation p of {0, 1, ..., n-1}.
+You are given a set of m constraints this permutation has to satisfy.
+More precisely, you are given the <type>int[]</type>s <b>a</b>, <b>b</b>, and <b>c</b>, each with m elements.
+For each valid i we get one constraint: LCA( p[<b>a</b>[i]], p[<b>b</b>[i]] ) must be <b>c</b>[i].
+<br />
+<br />
+If there is at least one permutation with the above properties, find and return one such permutation.
+Otherwise, return an empty <type>int[]</type>.</intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>BinaryTreeAndPermutation</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>findPermutation</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        vector&lt;int&gt;
+                    , 
+                        vector&lt;int&gt;
+                    , 
+                        vector&lt;int&gt;
+                    , 
+                        vector&lt;int&gt;
+                    , 
+                        vector&lt;int&gt;
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        vector&lt;int&gt;
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        vector&lt;int&gt; findPermutation(vector&lt;int&gt; lef, vector&lt;int&gt; rig, vector&lt;int&gt; a, vector&lt;int&gt; b, vector&lt;int&gt; c)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>256</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint escaped="1">n, m will be between 1 and 50, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>lef</b> and <b>rig</b> will contain exactly n elements.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">For each i, <b>lef</b>[i]=<b>rig</b>[i]=-1 or (i&lt;<b>lef</b>[i],<b>rig</b>[i]&lt;n and <b>lef</b>[i] != <b>rig</b>[i]).</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>lef</b> and <b>rig</b> will describe a binary tree.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>a</b>, <b>b</b>, <b>c</b> will contain exactly m elements.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element in <b>a</b>, <b>b</b>, <b>c</b> will be between 0 and n-1, inclusive.</user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">lef</span>
+                                <span class="value data">
+                                
+                                    { 1, -1, -1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">rig</span>
+                                <span class="value data">
+                                
+                                    { 2, -1, -1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">a</span>
+                                <span class="value data">
+                                
+                                    { 2, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">b</span>
+                                <span class="value data">
+                                
+                                    { 2, 0 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">c</span>
+                                <span class="value data">
+                                
+                                    { 0, 0 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            { 2, 1, 0 }
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">The tree looks as follows:
+<pre>
+  0
+ / \
+1   2
+</pre>
+We are given two constraints: LCA( p[2], p[2] ) should be 0, and LCA( p[1], p[0] ) should also be 0.
+The first constraint implies that p[2] must be 0.
+This leaves us with two possible permutations: {2,1,0} and {1,2,0}.
+We can easily verify that they both satisfy the second constraint as well, so each of them is a valid answer.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">lef</span>
+                                <span class="value data">
+                                
+                                    { 1, -1, -1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">rig</span>
+                                <span class="value data">
+                                
+                                    { 2, -1, -1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">a</span>
+                                <span class="value data">
+                                
+                                    { 2, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">b</span>
+                                <span class="value data">
+                                
+                                    { 2, 0 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">c</span>
+                                <span class="value data">
+                                
+                                    { 0, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            {  }
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">We have the same tree and the same first constraint.
+The second constraint now requires that LCA( p[1], p[0] ) should be 1.
+As we saw in Example 0, there is no permutation p with this property.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">lef</span>
+                                <span class="value data">
+                                
+                                    { 1, -1, 3, -1, -1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">rig</span>
+                                <span class="value data">
+                                
+                                    { 2, -1, 4, -1, -1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">a</span>
+                                <span class="value data">
+                                
+                                    { 3, 0, 0, 0 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">b</span>
+                                <span class="value data">
+                                
+                                    { 3, 1, 2, 4 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">c</span>
+                                <span class="value data">
+                                
+                                    { 0, 0, 0, 0 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            { 1, 3, 4, 0, 2 }
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">lef</span>
+                                <span class="value data">
+                                
+                                    { 1, -1, 3, -1, -1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">rig</span>
+                                <span class="value data">
+                                
+                                    { 2, -1, 4, -1, -1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">a</span>
+                                <span class="value data">
+                                
+                                    { 3, 0, 0, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">b</span>
+                                <span class="value data">
+                                
+                                    { 3, 1, 2, 4 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">c</span>
+                                <span class="value data">
+                                
+                                    { 0, 0, 0, 0 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            {  }
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">lef</span>
+                                <span class="value data">
+                                
+                                    { 1, -1, 3, -1, -1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">rig</span>
+                                <span class="value data">
+                                
+                                    { 2, -1, 4, -1, -1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">a</span>
+                                <span class="value data">
+                                
+                                    { 1, 2 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">b</span>
+                                <span class="value data">
+                                
+                                    { 2, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">c</span>
+                                <span class="value data">
+                                
+                                    { 0, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            {  }
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">lef</span>
+                                <span class="value data">
+                                
+                                    { 1, 3, 5, -1, -1, 7, -1, -1, -1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">rig</span>
+                                <span class="value data">
+                                
+                                    { 2, 4, 6, -1, -1, 8, -1, -1, -1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">a</span>
+                                <span class="value data">
+                                
+                                    { 6, 6, 7, 7, 3, 8, 5, 3 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">b</span>
+                                <span class="value data">
+                                
+                                    { 4, 3, 7, 1, 0, 0, 0, 5 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">c</span>
+                                <span class="value data">
+                                
+                                    { 1, 0, 1, 0, 2, 2, 2, 5 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            { 2, 0, 7, 5, 4, 8, 3, 1, 6 }
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

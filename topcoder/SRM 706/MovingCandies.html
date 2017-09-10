@@ -1,0 +1,66 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><p>Limak is a little bear.
+He is currently planning a walk on a rectangular grid.
+Each cell of the grid is either empty or it contains a single candy.
+Empty cells are denoted '.', cells with a candy are denoted '#'.</p>
+<br></br>
+<p>Limak wants to go from the top-left corner to the bottom-right corner of the grid.
+Since he loves sweets, there should be a candy in each cell he visits, including the starting and the final cell.
+He can only move in the four cardinal directions.
+In other words, he can move from cell A directly to cell B if and only if A and B share a side.</p>
+<br></br>
+<p>You are given the vector &lt;string&gt; <b>t</b>: the current state of the grid.
+Limak's journey may be impossible on the current grid.
+Your task is to make it possible by moving as few candies as you can.
+Moving a candy means picking it up and placing it into any empty cell.</p>
+<br></br>
+<p>Return the smallest number of candies that have to be moved in order to make Limak's journey possible.
+If there is no solution, return -1 instead.</p></td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>MovingCandies</td></tr><tr><td>Method:</td><td>minMoved</td></tr><tr><td>Parameters:</td><td>vector &lt;string&gt;</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int minMoved(vector &lt;string&gt; t)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr><tr><td>Stack limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>t</b> will have between 2 and 20 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>t</b> will have between 2 and 20 characters, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>t</b> will have the same number of characters.</td></tr><tr><td align="center" valign="top">-</td><td>Each character in each element of <b>t</b> will be either '.' or '#'.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{
+&quot;#...###&quot;,
+&quot;#...#.#&quot;,
+&quot;##..#.#&quot;,
+&quot;.#....#&quot;
+}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 3</pre></td></tr><tr><td><table><tr><td colspan="2">You must move at least 3 candies.
+One way of doing so is shown in the grid below.
+Candies were moved from cells denoted 'o' to cells denoted 'X'.
+<pre>
+#...###
+#XXX#.#
+oo..o.#
+.#....#
+</pre></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{
+&quot;#...###&quot;,
+&quot;#...#.#&quot;,
+&quot;##..###&quot;,
+&quot;.#....#&quot;
+}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 2</pre></td></tr><tr><td><table><tr><td colspan="2">2 moves are enough in this example:
+<pre>
+#...###
+#...#.#
+##XX#o#
+.o....#
+</pre></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{
+&quot;.#..&quot;,
+&quot;##..&quot;,
+&quot;..#.&quot;,
+&quot;..#.&quot;,
+&quot;..##&quot;,
+&quot;..##&quot;
+}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 2</pre></td></tr><tr><td><table><tr><td colspan="2">Note that the starting and the final cell should both contain candies.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{
+&quot;.....&quot;,
+&quot;.###.&quot;,
+&quot;####.&quot;,
+&quot;.....&quot;
+}</pre></td></tr></table></td></tr><tr><td><pre>Returns: -1</pre></td></tr><tr><td><table><tr><td colspan="2">No matter how you move candies, Limak won't be able to get from the top-left to the bottom-right corner.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{
+&quot;.#...#.###.#&quot;,
+&quot;#.#.##......&quot;,
+&quot;.#.#......#.&quot;,
+&quot;..#.......#.&quot;,
+&quot;##..........&quot;
+}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 9</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{
+&quot;###.#########..#####&quot;,
+&quot;.#######.###########&quot;
+}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 0</pre></td></tr><tr><td><table><tr><td colspan="2">You don't have to move any candies.
+Limak can already go from the top-left to the bottom-right corner.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">6)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{
+&quot;..&quot;,
+&quot;..&quot;
+}</pre></td></tr></table></td></tr><tr><td><pre>Returns: -1</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

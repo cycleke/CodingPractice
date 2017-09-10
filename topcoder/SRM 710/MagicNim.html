@@ -1,0 +1,35 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><p>
+Alice and Bob are playing a game of Nim with n+1 piles of stones.
+The piles are numbered from 0 to n.
+For each i between 0 and n-1, inclusive, pile i contains exactly <b>a</b>[i] normal stones.
+Pile n contains exactly one magic stone.
+</p>
+
+<p>
+Normal rules of Nim apply to this game:
+Alice and Bob take alternating turns, with Alice going first.
+In each turn the current player chooses a non-empty pile (between 0 and n, inclusive) and removes an arbitrary positive number of stones from the pile.
+The player who is unable to make a valid move loses the game.
+In other words, the winner is the player who removes the very last stone.
+</p>
+
+<p>
+Additionally, there is a rule for the magic stone.
+When a player chooses pile n and removes the magic stone, they have the option to reverse the victory condition.
+If they choose to do so, the player who is unable to make a valid move now <i>wins</i> the game.
+If they choose not to do it, the game continues with the original victory condition.
+</p>
+
+<p>
+You are given the vector &lt;int&gt; <b>a</b> with n elements.
+(Note that the pile with the magic stone is not explicitly mentioned in <b>a</b>.)
+</p>
+
+<p>
+Help Alice and Bob determine the winner of the game, assuming both of them play optimally.
+Return the name of the winner: either "Alice" or "Bob".
+</p></td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>MagicNim</td></tr><tr><td>Method:</td><td>findWinner</td></tr><tr><td>Parameters:</td><td>vector &lt;int&gt;</td></tr><tr><td>Returns:</td><td>string</td></tr><tr><td>Method signature:</td><td>string findWinner(vector &lt;int&gt; a)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr><tr><td>Stack limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>a</b> will contain between 1 and 10 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>a</b> will be between 1 and 50, inclusive.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{1}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Alice&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">There are two piles. The first pile is a normal pile with one stone. The second pile contains the magic stone.
+
+In this case, Alice can take the magic stone and change the rules so that the last person who takes a stone loses. Now, Bob is forced to take the stone in the first pile, and since that is the last available stone, he loses.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{2}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Bob&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">There are two piles. The first pile is a normal pile with two stones. The second pile contains the magic stone.
+
+In this case, no matter what Alice does, she will lose.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{1,1,1,1}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Alice&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{1,1,1,1,1}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Alice&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{1,3}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Bob&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{4,4,2}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Alice&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">6)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{50,50,50,50,50,50,50,50,50,50}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Alice&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">7)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{6,7}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Bob&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

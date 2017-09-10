@@ -1,0 +1,51 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><p>
+There are n people who live on the real axis.
+The people are numbered 0 through n-1.
+Person i lives at the position <b>pos</b>[i].
+All of these positions are distinct.
+</p>
+
+<p>
+Alice is a saleswoman.
+She travels along the real axis and she makes trades with the n people who live there.
+Alice trades items of a single type.
+Each person has a particular supply or demand of that item.
+In particular, if <b>delta</b>[i] is positive, the person has a supply of <b>delta</b>[i] units, otherwise the person has a demand of -<b>delta</b>[i] units.
+It is guaranteed that the sum of all elements of <b>delta</b> is nonnegative.
+</p>
+
+<p>
+At the beginning, Alice is at position 0 and she has no items.
+In one second, she can move left or right by one unit.
+She can trade with a person if and only if she is exactly at the same position as that person.
+All trades happen instantly.
+During each trade Alice can buy or sell as many items as she wants.
+Of course, she can only sell the items she currently owns.
+While walking along the real axis, Alice can carry arbitrarily many items at the same time.
+She can pass through a position with a person without trading with them, if that is what she wants.
+(She can always come back and trade with them later.)
+</p>
+
+<p>
+Alice has two goals:
+<ul>
+<li>She must trade the items in a way that will satisfy all demands.</li>
+<li>She must end her travels at the position of the rightmost person.</li>
+</ul>
+</p>
+
+<p>
+Determine and return the smallest amount of time in which Alice can achieve both goals.
+</p></td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>Saleswoman</td></tr><tr><td>Method:</td><td>minMoves</td></tr><tr><td>Parameters:</td><td>vector &lt;int&gt;, vector &lt;int&gt;</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int minMoves(vector &lt;int&gt; pos, vector &lt;int&gt; delta)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr><tr><td>Stack limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>pos</b> will have between 1 and 300 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>delta</b> will have the same number of elements as <b>pos</b>.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>pos</b> will be between 1 and 10^5, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Elements in <b>pos</b> will be distinct and will be strictly increasing.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>delta</b> will be between -10^5 and 10^5, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>The sum of <b>delta</b> will be nonnegative.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{3,14,15,92,101}</pre></td></tr><tr><td><pre>{-3,2,3,-3,1}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 143</pre></td></tr><tr><td><table><tr><td colspan="2">Here we have five people. Person 0 is at position 3 and has a demand of 3 units. Person 1 is at position 14 and has 2 units of supply. Person 2 is at position 15 and 3 units of supply. Person 3 is at position 92 and has a demand of 3 unit. Person 4 is at position 101 and has 1 unit of supply
+
+In this case, one optimal path for Alice is as follows:
+<ul>
+<li> First, walk to position 15. Since Alice is at the same position as person 2, she can take all of their supply. </li>
+<li> Next, walk to position 14. Alice can take all of the supply here, so she has a total of 5 units of supply. </li> 
+<li> Next, walk to position 3. Alice can satisfy this person's demand. She will be left with 2 units of supply. </li>
+<li> Walk to position 101. Alice grabs the supply, so she has 3 units. </li>
+<li> Walk to position 92. Alice can satisfy this person's demands, and she is left with 0 units of supply. </li>
+<li> Finally, walk back to position 101 and end the walk.</li>
+</ul>
+The total time taken by Alice is 15+1+11+98+9+9 = 143.
+</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{1,2,4,8,16,32,64,128}</pre></td></tr><tr><td><pre>{-1,-1,-1,-1,1,1,1,1}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 382</pre></td></tr><tr><td><table><tr><td colspan="2">In this case, Alice's path will look like 0 -> 128 -> 1 -> 128.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{100000}</pre></td></tr><tr><td><pre>{0}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 100000</pre></td></tr><tr><td><table><tr><td colspan="2">Note that Alice must end at the rightmost person, even if she doesn't need to do any trades. Note that it is also allowed for a person's delta to be zero.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{100,200,300,400}</pre></td></tr><tr><td><pre>{10,-3,-5,2}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 400</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{1,2,3,5,8,13,21,34,55,89}</pre></td></tr><tr><td><pre>{-1,1,-1,1,-1,1,-1,1,-1,1}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 199</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{1,2,3,6,10,15,21,28,36,45,55}</pre></td></tr><tr><td><pre>{-3,-5,10,-2,-6,-7,3,-2,8,5,-1}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 129</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>
