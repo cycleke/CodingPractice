@@ -1,0 +1,1 @@
+g++ D1T3.cpp -o D1T3 -g -Wl,--stack=512000000
