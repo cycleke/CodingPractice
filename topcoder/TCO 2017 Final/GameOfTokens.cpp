@@ -24,8 +24,69 @@ public:
   int count(string pattern);
 };
 
+#define EP emplace
+#define PB push_back
+#define MK make_pair
+#define ACCU accumulate
+#define MSET(a, b) memset(a, b, sizeof(a))
+#define MCPY(a, b) memcpy(a, b, sizeof(a))
+#define SZ(a) int((a).size())
+#define ALL(a) (a).begin(), (a).end()
+#define INF 0x3f3f3f3f
+#define IINF 0x3f3f3f3f3f3f3f3fll
+#define EPS 1e-9
+#define PI 3.1415926535897932384626
+#define MOD 1000000007
+#define FOR_IN(i, a) for (auto i : x)
+#define REP(i, l, r) for (int i = (l); i < (r); ++i)
+#define QREP(i, l, r) for (int i = (l); i <= (r); ++i)
+#define PER(i, l, r) for (int i = (r)-1; i >= (l); --i)
+#define QPER(i, l, r) for (int i = (r); i >= (l); --i)
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef vector<int> vi;
+typedef vector<pii> vpii;
+
+//Head File
+
+int f[107][10107], g[107][10107], n, n2;
+
+void Update(int p, int q, int r) {
+  int &x = f[p + n][q + n2];
+  x += r;
+  if (x >= MOD)
+    x -= MOD;
+}
+
 int GameOfTokens::count(string pattern) {
-  return 0;
+  reverse(ALL(pattern));
+  MSET(f, 0);
+  n = SZ(pattern);
+  n2 = n * n;
+  f[n][n2] = 1;
+  REP (i, 0, n) {
+    MCPY(g, f);
+    MSET(f, 0);
+    REP (j, 0, (n << 1) | 1)
+      REP (k, 0, (n2 << 1) | 1)
+      if (g[j][k] != 0) {
+        int cnt = j - n, ret = k - n2;
+        if (pattern[i] == 'A' || pattern[i] == '?')
+          Update(max(cnt + 1, 0), ret, g[j][k]);
+        if (pattern[i] == 'B' || pattern[i] == '?')
+          Update(min(cnt - 1, 0), ret, g[j][k]);
+        if (pattern[i] == '.' || pattern[i] == '?')
+          Update(cnt, ret + cnt, g[j][k]);
+      }
+  }
+  int ans = 0;
+  REP (j, 0, (n << 1) | 1)
+    REP (k, n2 + 1, (n2 << 1) | 1) {
+    ans += f[j][k];
+    if (ans >= MOD)
+      ans -= MOD;
+  }
+  return ans;
 }
 
 // CUT begin
@@ -98,7 +159,7 @@ int run_test(bool mainProcess, const set<int> &case_set, const string command) {
   }
   if (mainProcess) {
     cout << endl << "Passed : " << passed << "/" << cases << " cases" << endl;
-    int T = time(NULL) - 1518495827;
+    int T = time(NULL) - 1518514457;
     double PT = T / 60.0, TT = 75.0;
     cout << "Time   : " << T / 60 << " minutes " << T % 60 << " secs" << endl;
     cout << "Score  : " << 450 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT)) << " points" << endl;
