@@ -1,7 +1,5 @@
 * Algorithm Practice
-______________________________
 Most source files that I wrote to practice algorithm since 2015 are here.
 
 ** License
-______________________________
 The gem is available as open source under the terms of the [[https://www.mozilla.org/en-US/MPL/2.0/Mozilla][Public License 2.0]].
