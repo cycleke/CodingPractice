@@ -70,6 +70,7 @@ int main() {
         }
       }
       return true;
+
     };
   cout << (Check() ? "Yes" : "No") << endl;
   return 0;
