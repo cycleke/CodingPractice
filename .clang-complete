@@ -1,0 +1,4 @@
+-DDEBUG
+-I./
+-I./include
+-I/usr/include/c++/8.2.1
