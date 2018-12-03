@@ -1,3 +1,14 @@
 README.md
 .vscode/*
 .idea/*
+
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+
+*.bak
+*.swp
+&1
+*~
+\#*#
