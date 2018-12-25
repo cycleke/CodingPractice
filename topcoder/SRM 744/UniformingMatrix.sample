@@ -1,0 +1,49 @@
+-- Example 0
+2
+1101
+0010
+
+possible
+-- Example 1
+8
+11111
+11111
+11111
+11111
+11111
+11111
+11111
+11111
+
+possible
+-- Example 2
+3
+110
+001
+110
+
+possible
+-- Example 3
+4
+01010
+10101
+01010
+01010
+
+possible
+-- Example 4
+7
+0110011
+1011000
+0101000
+0010001
+1010011
+1011011
+0111100
+
+impossible
+-- Example 5
+1
+0
+
+impossible
