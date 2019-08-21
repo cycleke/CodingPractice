@@ -1,0 +1,7 @@
+3 3
+ab 2
+ab
+bc 2
+bc
+ca 2
+ac
