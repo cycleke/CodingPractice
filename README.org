@@ -1,10 +1,10 @@
 * Coding Practice
 ** Algorithm Practice
-  Most source files that I wrote to practice algorithm since 2015 are here.
-  
+  Most source files that I wrote to practice algorithm for OI and *PCP since 2015 are here.
+
 ** Learning Code
   Some source files when I learn some new are here.
-  
+
 ** LeetCode Practice
 
 ** License
